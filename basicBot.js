@@ -241,9 +241,9 @@
         status: false,
         name: 'JustBot',
         loggedInID: null,
-        scriptLink: 'https://rawgit.com/basicBot/source/master/basicBot.js',
+        scriptLink: 'https://raw.githubusercontent.com/mini500/JustMiniBot/Bot.js/basicBot.js',
         cmdLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/commands.md',
-        chatLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/lang/en.json',
+        chatLink: 'https://raw.githubusercontent.com/mini500/JustMiniBot/Bot.js/lang/en.json',
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
@@ -251,8 +251,8 @@
         settings: {
             botName: 'JustminiBot',
             language: 'english',
-            chatLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/lang/en.json',
-            scriptLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/basicBot.js',
+            chatLink: 'https://raw.githubusercontent.com/mini500/JustMiniBot/Bot.js/lang/en.json',
+            scriptLink: 'https://raw.githubusercontent.com/mini500/JustMiniBot/Bot.js/basicBot.js',
             roomLock: false, // Requires an extension to re-load the script
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
