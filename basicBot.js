@@ -103,7 +103,7 @@
 
     var loadChat = function(cb) {
         if (!cb) cb = function() {};
-        $.get('https://github.com/mini500/JustMiniBot/blob/Bot.js/lang/langIndex.json', function(json) {
+        $.get('https://raw.githubusercontent.com/mini500/JustMiniBot/Bot.js/lang/langIndex.jsonn', function(json) {
             var link = basicBot.chatLink;
             if (json !== null && typeof json !== 'undefined') {
                 langIndex = json;
