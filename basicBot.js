@@ -103,7 +103,7 @@
 
     var loadChat = function(cb) {
         if (!cb) cb = function() {};
-        $.get('https://raw.githubusercontent.com/mini500/JustMiniBot/Bot.js/lang/langIndex.jsonn', function(json) {
+        $.get('https://rawgit.com/basicBot/source/master/lang/langIndex.json', function(json) {
             var link = basicBot.chatLink;
             if (json !== null && typeof json !== 'undefined') {
                 langIndex = json;
@@ -233,8 +233,8 @@
     };
 
     var botCreator = 'mini500';
-    var botMaintainer = 'JustJustMe'
-    var botCreatorIDs = ['16498004', '4878561'];
+    var botMaintainer = 'JustJustme'
+    var botCreatorIDs = ['3851534', '16498004'];
 
     var basicBot = {
         version: '0.1',
@@ -249,10 +249,10 @@
         retrieveSettings: retrieveSettings,
         retrieveFromStorage: retrieveFromStorage,
         settings: {
-            botName: 'JustminiBot',
+            botName: 'basicBot',
             language: 'english',
             chatLink: 'https://rawgit.com/basicBot/source/master/lang/en.json',
-            scriptLink: 'https://rawgit.com/basicBot/source/master/basicBot.js',,
+            scriptLink: 'https://rawgit.com/basicBot/source/master/basicBot.js',
             roomLock: false, // Requires an extension to re-load the script
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
@@ -281,7 +281,7 @@
             usercommandsEnabled: true,
             thorCommand: false,
             thorCooldown: 10,
-            skipPosition: 1,
+            skipPosition: 3,
             skipReasons: [
                 ['theme', 'This song does not fit the room theme. '],
                 ['op', 'This song is on the OP list. '],
@@ -295,7 +295,7 @@
             afkRankCheck: 'ambassador',
             motdEnabled: false,
             motdInterval: 5,
-            motd: 'I hope that everybody have a good day! Don''t forgot check $commands ;3 And we recommending https://rcs.radiant.dj/',
+            motd: 'Temporary Message of the Day',
             filterChat: true,
             etaRestriction: false,
             welcome: true,
@@ -307,12 +307,12 @@
             website: null,
             intervalMessages: [],
             messageInterval: 5,
-            songstats: false,
-            commandLiteral: '$',
+            songstats: true,
+            commandLiteral: '!',
             blacklists: {
-                NSFW: 'https://www.dropbox.com/s/rv7chpcy7f7pdct/NSFW.json?dl=1',
-                Op: 'https://www.dropbox.com/s/47o4pxep4bbirdl/op.json?dl=1',
-                Ban: 'https://www.dropbox.com/s/al5q0e01tz3qxs4/Banned.json?dl=1'
+                NSFW: 'https://rawgit.com/basicBot/custom/master/blacklists/NSFWlist.json',
+                OP: 'https://rawgit.com/basicBot/custom/master/blacklists/OPlist.json',
+                BANNED: 'https://rawgit.com/basicBot/custom/master/blacklists/BANNEDlist.json'
             }
         },
         room: {
@@ -2194,6 +2194,53 @@
                 }
             },
 
+            /*
+            // This does not work anymore.
+            deletechatCommand: {
+                command: 'deletechat',
+                rank: 'mod',
+                type: 'startsWith',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                    else {
+                        var msg = chat.message;
+                        if (msg.length === cmd.length) return API.sendChat(subChat(basicBot.chat.nouserspecified, {name: chat.un}));
+                        var name = msg.substring(cmd.length + 2);
+                        var user = basicBot.userUtilities.lookupUserName(name);
+                        if (typeof user === 'boolean') return API.sendChat(subChat(basicBot.chat.invaliduserspecified, {name: chat.un}));
+                        var chats = $('.from');
+                        var message = $('.message');
+                        var emote = $('.emote');
+                        var from = $('.un.clickable');
+                        for (var i = 0; i < chats.length; i++) {
+                            var n = from[i].textContent;
+                            if (name.trim() === n.trim()) {
+
+                                // var messagecid = $(message)[i].getAttribute('data-cid');
+                                // var emotecid = $(emote)[i].getAttribute('data-cid');
+                                // API.moderateDeleteChat(messagecid);
+
+                                // try {
+                                //     API.moderateDeleteChat(messagecid);
+                                // }
+                                // finally {
+                                //     API.moderateDeleteChat(emotecid);
+                                // }
+
+                                if (typeof $(message)[i].getAttribute('data-cid') == 'undefined'){
+                                    API.moderateDeleteChat($(emote)[i].getAttribute('data-cid')); // works well with normal messages but not with emotes due to emotes and messages are seperate.
+                                } else {
+                                    API.moderateDeleteChat($(message)[i].getAttribute('data-cid'));
+                                }
+                            }
+                        }
+                        API.sendChat(subChat(basicBot.chat.deletechat, {name: chat.un, username: name}));
+                    }
+                }
+            },
+            */
+
             deletechatCommand: {
                 command: 'deletechat',
                 rank: 'mod',
@@ -2644,7 +2691,7 @@
 
             killCommand: {
                 command: 'kill',
-                rank: 'cohost',
+                rank: 'bouncer',
                 type: 'exact',
                 functionality: function(chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void(0);
@@ -4028,7 +4075,7 @@
 
             whoisCommand: {
                 command: 'whois',
-                rank: 'cohost',
+                rank: 'bouncer',
                 type: 'startsWith',
                 functionality: function(chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void(0);
