@@ -112,7 +112,7 @@
 
     var loadChat = function(cb) {
         if (!cb) cb = function() {};
-        $.get('https://rawgit.com/basicBot/source/master/lang/langIndex.json', function(json) {
+        $.get('https://github.com/mini500/JustMiniBot/blob/Bot.js/lang/langIndex.json', function(json) {
             var link = basicBot.chatLink;
             if (json !== null && typeof json !== 'undefined') {
                 langIndex = json;
@@ -241,23 +241,27 @@
         return str;
     };
 
+    var botCreator = 'mini500';
+    var botMaintainer = 'JustJustMe'
+    var botCreatorIDs = ['16498004', '4878561'];
+
     var basicBot = {
-        version: '0.1.1',
+        version: '0.1',
         status: false,
-        name: 'BotXX',
+        name: 'JustBot',
         loggedInID: null,
-        scriptLink: 'https://rawgit.com/basicBot/source/master/basicBot.js',
-        cmdLink: 'http://git.io/245Ppg',
-        chatLink: 'https://rawgit.com/basicBot/source/master/lang/en.json',
+        scriptLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/basicBot.js',
+        cmdLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/commands.md',
+        chatLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/lang/en.json',
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
         retrieveFromStorage: retrieveFromStorage,
         settings: {
-            botName: 'basicBot',
+            botName: 'JustminiBot',
             language: 'english',
-            chatLink: 'https://rawgit.com/basicBot/source/master/lang/en.json',
-            scriptLink: 'https://rawgit.com/basicBot/source/master/basicBot.js',
+            chatLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/lang/en.json',
+            scriptLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/basicBot.js',
             roomLock: false, // Requires an extension to re-load the script
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
@@ -286,7 +290,7 @@
             usercommandsEnabled: true,
             thorCommand: false,
             thorCooldown: 10,
-            skipPosition: 3,
+            skipPosition: 1,
             skipReasons: [
                 ['theme', 'This song does not fit the room theme. '],
                 ['op', 'This song is on the OP list. '],
@@ -300,7 +304,7 @@
             afkRankCheck: 'ambassador',
             motdEnabled: false,
             motdInterval: 5,
-            motd: 'I hope that everybody have good day! :3',
+            motd: 'I hope that everybody have a good day! Don''t forgot check $commands ;3 And we recommending https://rcs.radiant.dj/',
             filterChat: true,
             etaRestriction: false,
             welcome: true,
@@ -312,12 +316,12 @@
             website: null,
             intervalMessages: [],
             messageInterval: 5,
-            songstats: true,
-            commandLiteral: '!',
+            songstats: false,
+            commandLiteral: '$',
             blacklists: {
-                NSFW: 'https://rawgit.com/basicBot/custom/master/blacklists/NSFWlist.json',
-                OP: 'https://rawgit.com/basicBot/custom/master/blacklists/OPlist.json',
-                BANNED: 'https://rawgit.com/basicBot/custom/master/blacklists/BANNEDlist.json'
+                NSFW: 'https://www.dropbox.com/s/rv7chpcy7f7pdct/NSFW.json?dl=1',
+                Op: 'https://www.dropbox.com/s/47o4pxep4bbirdl/op.json?dl=1',
+                Ban: 'https://www.dropbox.com/s/al5q0e01tz3qxs4/Banned.json?dl=1'
             }
         },
         room: {
@@ -670,6 +674,69 @@
                 unlockBooth: function() {
                     API.moderateLockWaitList(basicBot.roomUtilities.booth.locked);
                     clearTimeout(basicBot.roomUtilities.booth.lockTimer);
+                }
+            },
+            afkCheck: function() {
+                if (!basicBot.status || !basicBot.settings.afkRemoval) return void(0);
+                var rank = basicBot.roomUtilities.rankToNumber(basicBot.settings.afkRankCheck);
+                var djlist = API.getWaitList();
+                var lastPos = Math.min(djlist.length, basicBot.settings.afkpositionCheck);
+                if (lastPos - 1 > djlist.length) return void(0);
+                for (var i = 0; i < lastPos; i++) {
+                    if (typeof djlist[i] !== 'undefined') {
+                        var id = djlist[i].id;
+                        var user = basicBot.userUtilities.lookupUser(id);
+                        if (typeof user !== 'boolean') {
+                            var plugUser = basicBot.userUtilities.getUser(user);
+                            if (rank !== null && basicBot.userUtilities.getPermission(plugUser) <= rank) {
+                                var name = plugUser.username;
+                                var lastActive = basicBot.userUtilities.getLastActivity(user);
+                                var inactivity = Date.now() - lastActive;
+                                var time = basicBot.roomUtilities.msToStr(inactivity);
+                                var warncount = user.afkWarningCount;
+                                if (inactivity > basicBot.settings.maximumAfk * 60 * 1000) {
+                                    if (warncount === 0) {
+                                        API.sendChat(subChat(basicBot.chat.warning1, {
+                                            name: name,
+                                            time: time
+                                        }));
+                                        user.afkWarningCount = 3;
+                                        user.afkCountdown = setTimeout(function(userToChange) {
+                                            userToChange.afkWarningCount = 1;
+                                        }, 90 * 1000, user);
+                                    } else if (warncount === 1) {
+                                        API.sendChat(subChat(basicBot.chat.warning2, {
+                                            name: name
+                                        }));
+                                        user.afkWarningCount = 3;
+                                        user.afkCountdown = setTimeout(function(userToChange) {
+                                            userToChange.afkWarningCount = 2;
+                                        }, 30 * 1000, user);
+                                    } else if (warncount === 2) {
+                                        var pos = API.getWaitListPosition(id);
+                                        if (pos !== -1) {
+                                            pos++;
+                                            basicBot.room.afkList.push([id, Date.now(), pos]);
+                                            user.lastDC = {
+
+                                                time: null,
+                                                position: null,
+                                                songCount: 0
+                                            };
+                                            API.moderateRemoveDJ(id);
+                                            API.sendChat(subChat(basicBot.chat.afkremove, {
+                                                name: name,
+                                                time: time,
+                                                position: pos,
+                                                maximumafk: basicBot.settings.maximumAfk
+                                            }));
+                                        }
+                                        user.afkWarningCount = 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             },
             smartSkip: function(reason) {
@@ -2136,53 +2203,6 @@
                 }
             },
 
-            /*
-            // This does not work anymore.
-            deletechatCommand: {
-                command: 'deletechat',
-                rank: 'mod',
-                type: 'startsWith',
-                functionality: function (chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
-                    else {
-                        var msg = chat.message;
-                        if (msg.length === cmd.length) return API.sendChat(subChat(basicBot.chat.nouserspecified, {name: chat.un}));
-                        var name = msg.substring(cmd.length + 2);
-                        var user = basicBot.userUtilities.lookupUserName(name);
-                        if (typeof user === 'boolean') return API.sendChat(subChat(basicBot.chat.invaliduserspecified, {name: chat.un}));
-                        var chats = $('.from');
-                        var message = $('.message');
-                        var emote = $('.emote');
-                        var from = $('.un.clickable');
-                        for (var i = 0; i < chats.length; i++) {
-                            var n = from[i].textContent;
-                            if (name.trim() === n.trim()) {
-
-                                // var messagecid = $(message)[i].getAttribute('data-cid');
-                                // var emotecid = $(emote)[i].getAttribute('data-cid');
-                                // API.moderateDeleteChat(messagecid);
-
-                                // try {
-                                //     API.moderateDeleteChat(messagecid);
-                                // }
-                                // finally {
-                                //     API.moderateDeleteChat(emotecid);
-                                // }
-
-                                if (typeof $(message)[i].getAttribute('data-cid') == 'undefined'){
-                                    API.moderateDeleteChat($(emote)[i].getAttribute('data-cid')); // works well with normal messages but not with emotes due to emotes and messages are seperate.
-                                } else {
-                                    API.moderateDeleteChat($(message)[i].getAttribute('data-cid'));
-                                }
-                            }
-                        }
-                        API.sendChat(subChat(basicBot.chat.deletechat, {name: chat.un, username: name}));
-                    }
-                }
-            },
-            */
-
             deletechatCommand: {
                 command: 'deletechat',
                 rank: 'mod',
@@ -3114,7 +3134,7 @@
 
             pingCommand: {
                 command: 'ping',
-                rank: 'cohost',
+                rank: 'user',
                 type: 'exact',
                 functionality: function(chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void(0);
@@ -3146,7 +3166,7 @@
 
             reloadCommand: {
                 command: 'reload',
-                rank: 'cohost',
+                rank: 'bouncer',
                 type: 'exact',
                 functionality: function(chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void(0);
@@ -4017,7 +4037,7 @@
 
             whoisCommand: {
                 command: 'whois',
-                rank: 'bouncer',
+                rank: 'Co-Host',
                 type: 'startsWith',
                 functionality: function(chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void(0);
