@@ -198,7 +198,7 @@
         }
 
     };
-
+ 
     String.prototype.splitBetween = function(a, b) {
         var self = this;
         self = this.split(a);
@@ -242,7 +242,7 @@
     };
 
     var botCreator = 'mini500';
-    var botMaintainer = 'JustJustMe'
+    var botMaintainer = 'JustJustMe';
     var botCreatorIDs = ['4878561', '16498004'];
 
     var basicBot = {
