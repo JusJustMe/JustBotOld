@@ -182,7 +182,7 @@
     var justbot = {
         version: '0.1',
         status: false,
-        name: 'נยรtჩ๏t',
+        name: 'Justbot',
         loggedInID: null,
         scriptLink: 'https://rawgit.com/mini500/JustMiniBot/Bot.js/justbot.js',
         cmdLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/commands.md',
@@ -2045,7 +2045,7 @@
                     }
                 }
             },
-/*
+
             hugCommand: {
                 command: 'hug',
                 rank: 'user',
@@ -2086,7 +2086,7 @@
                     }
                 }
             },
-*/
+			
             cycleCommand: {
                 command: 'cycle',
                 rank: 'manager',
