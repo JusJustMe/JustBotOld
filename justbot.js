@@ -2045,6 +2045,7 @@
                     }
                 }
             },
+/*
             hugCommand: {
                 command: 'hug',
                 rank: 'user',
@@ -2085,7 +2086,7 @@
                     }
                 }
             },
-
+*/
             cycleCommand: {
                 command: 'cycle',
                 rank: 'manager',

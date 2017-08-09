@@ -55,10 +55,6 @@
         "Don't bet on it.",
         "Forget about it."
     ],
-	"hug": [
-		"give you a warm hug",
-		"Start nibbing your ears"
-	],
     "nodatafound": "No previous data found.",
     "currentlang": "\/me Language currently set to: %%LANGUAGE%%",
     "langerror": "\/me The language you've selected isn't available. List of languages available: %%LINK%%",
