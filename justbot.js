@@ -102,7 +102,7 @@
                 justbot.room.afkList = room.afkList;
                 justbot.room.historyList = room.historyList;
                 justbot.room.mutedUsers = room.mutedUsers;
-                //justbot.room.autoskip = room.autoskip;
+                justbot.room.autoskip = room.autoskip;
                 justbot.room.roomstats = room.roomstats;
                 justbot.room.messages = room.messages;
                 justbot.room.queue = room.queue;
