@@ -183,7 +183,7 @@
         version: '0.1',
         status: false,
         name: 'נยรtჩ๏t',
-        loggedInID: 29284865,
+        loggedInID: null,
         scriptLink: 'https://rawgit.com/mini500/JustMiniBot/Bot.js/justbot.js',
         cmdLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/commands.md',
         chatLink: 'https://rawgit.com/mini500/JustMiniBot/Bot.js/lang/en.json',
