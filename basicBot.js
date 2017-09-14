@@ -46,7 +46,7 @@
 
     var loadChat = function(cb) {
         if (!cb) cb = function() {};
-        $.get('https://rawgit.com/mini500/JustMiniBot/Bot.js/lang/en.json', function(json) {
+        $.get('https://rawgit.com/basicBot/source/master/lang/langIndex.json', function(json) {
             var link = justbot.chatLink;
             if (json !== null && typeof json !== 'undefined') {
                 langIndex = json;
@@ -184,9 +184,9 @@
         status: false,
         name: 'Justbot',
         loggedInID: null,
-        scriptLink: 'https://rawgit.com/mini500/JustMiniBot/Bot.js/justbot.js',
-        cmdLink: 'https://github.com/mini500/JustMiniBot/blob/Bot.js/commands.md',
-        chatLink: 'https://rawgit.com/mini500/JustMiniBot/Bot.js/lang/en.json',
+        scriptLink: 'https://rawgit.com/JusJustMe/JustMiniBot/Bot.js/justbot.js',
+        cmdLink: 'http://git.io/245Ppg',
+        chatLink: 'https://rawgit.com/basicBot/source/master/lang/en.json',
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
@@ -194,8 +194,8 @@
         settings: {
             botName: 'justbot',
             language: 'english',
-            chatLink: 'https://rawgit.com/mini500/JustMiniBot/Bot.js/lang/en.json',
-            scriptLink: 'https://rawgit.com/mini500/JustMiniBot/Bot.js/justbot.js',
+            chatLink: 'https://rawgit.com/basicBot/source/master/lang/en.json',
+            scriptLink: 'https://rawgit.com/JusJustMe/JustMiniBot/Bot.js/justbot.js',
             roomLock: false, // Requires an extension to re-load the script
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
@@ -253,9 +253,9 @@
             songstats: false,
             commandLiteral: '!',
             blacklists: {
-                NSFW: 'https://rawgit.com/mini500/JustMiniBot/Bot.js/NSFW.json',
-                OP: 'https://rawgit.com/mini500/JustMiniBot/Bot.js/op.json',
-                Banned: 'https://rawgit.com/mini500/JustMiniBot/Bot.js/Banned.json'
+                NSFW: 'https://rawgit.com/JusJustMe/JustMiniBot/Bot.js/NSFW.json',
+                OP: 'https://rawgit.com/basicBot/custom/master/blacklists/OPlist.json',
+                BANNED: 'https://rawgit.com/JusJustMe/JustMiniBot/Bot.js/Banned.json'
             }
         },
         room: {
@@ -2690,7 +2690,7 @@
                         }));
                         var argument = msg.substring(cmd.length + 1);
 
-                        $.get('https://rawgit.com/justbot/source/master/lang/langIndex.json', function(json) {
+                        $.get('https://rawgit.com/basicBot/source/master/lang/langIndex.json', function(json) {
                             var langIndex = json;
                             var link = langIndex[argument.toLowerCase()];
                             if (typeof link === 'undefined') {
