@@ -2050,6 +2050,20 @@
                 command: 'hug',
                 rank: 'user',
                 type: 'startsWith',
+                cookies: ['hugs you',
+                    'hugs you and says: “I love you”',
+                    'hugs you and starts nibbling on your ear',
+                    'hugs you so hard that for a moment your soul leaves your body',
+                    'hugs you and says: “I will never let you go”',
+                    'wants a hug',
+                    'hugs you and says: “I hope this hug makes your day brighter”',
+                    'hugs you and says: “Shut up and hug me back”',
+                    'hugs you but suddenly yells: “Its Just a Prank!”',
+                    'gives you a warm hug',
+                    'gives you a hug. But wait? Sike its a cuddle.',
+                    'gives you a bear hug',
+                    'hugs you and is never letting go again'
+                ],
                 getCookie: function(chat) {
                     var c = Math.floor(Math.random() * justbot.chat.hug.length);
                     return justbot.chat.hug[c];
