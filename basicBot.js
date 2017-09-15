@@ -1269,11 +1269,11 @@
             spam: [
                 'hueh', 'hu3', 'brbr', 'heu', 'brbr', 'kkkk', 'spoder', 'mafia', 'zuera', 'zueira',
                 'zueria', 'aehoo', 'aheu', 'alguem', 'algum', 'brazil', 'zoeira', 'fuckadmins', 'affff', 'vaisefoder', 'huenaarea',
-                'hitler', 'ashua', 'ahsu', 'ashau', 'lulz', 'huehue', 'hue', 'huehuehue', 'merda', 'pqp', 'puta', 'mulher', 'pula', 'retarda', 'caralho', 'filha', 'ppk',
+                'hitler', 'ashua', 'ahsu', 'ashau', 'merda', 'pqp', 'puta', 'mulher', 'pula', 'retarda', 'caralho', 'filha', 'ppk',
                 'gringo', 'fuder', 'foder', 'hua', 'ahue', 'modafuka', 'modafoka', 'mudafuka', 'mudafoka', 'ooooooooooooooo', 'foda'
             ],
             curses: [
-                'nigger', 'faggot', 'nigga', 'niqqa', 'motherfucker', 'modafocka'
+                'nigger', 'faggot', 'nigga', 'niqqa', 'motherfucker', 'modafocka', 'fuck you', 'fck u', 'fuck u'
             ]
         },
         connectAPI: function() {
@@ -2051,14 +2051,14 @@
                 rank: 'user',
                 type: 'startsWith',
                 cookies: ['hugs you',
-                    'hugs you and says: “I love you”',
+                    'hugs you and says: “I l-love you >//.//<”',
                     'hugs you and starts nibbling on your ear',
                     'hugs you so hard that for a moment your soul leaves your body',
                     'hugs you and says: “I will never let you go”',
                     'wants a hug',
-                    'hugs you and says: “I hope this hug makes your day brighter”',
-                    'hugs you and says: “Shut up and hug me back”',
-                    'hugs you but suddenly yells: “Its Just a Prank!”',
+                    'hugs you and says: “I hope this hug makes your day brighter!”',
+                    'hugs you and says: “Stfu and hug me back”',
+                    'hugs you but suddenly yells: “Do you want be my friend? ^^”',
                     'gives you a warm hug',
                     'gives you a hug. But wait? Sike its a cuddle.',
                     'gives you a bear hug',
