@@ -46,7 +46,7 @@
 
     var loadChat = function(cb) {
         if (!cb) cb = function() {};
-        $.get('https://rawgit.com/basicBot/source/master/lang/langIndex.json', function(json) {
+        $.get('https://rawgit.com/JusJustMe/JustBot/Bot.js/lang/langIndex.json', function(json) {
             var link = justbot.chatLink;
             if (json !== null && typeof json !== 'undefined') {
                 langIndex = json;
@@ -1479,7 +1479,6 @@
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void(0);
                     if (!justbot.commands.executable(this.rank, chat)) return void(0);
                     else {
-
                     }
                 }
             },
@@ -2050,35 +2049,42 @@
                 command: 'hug',
                 rank: 'user',
                 type: 'startsWith',
-                cookies: ['hugs you',
-                    'hugs you and says: “I l-love you >//.//<”',
-                    'hugs you and starts nibbling on your ear',
-                    'hugs you so hard that for a moment your soul leaves your body',
-                    'hugs you and says: “I will never let you go”',
-                    'wants a hug',
-                    'hugs you and says: “I hope this hug makes your day brighter!”',
-                    'hugs you and says: “Stfu and hug me back”',
-                    'hugs you but suddenly yells: “Do you want be my friend? ^^”',
-                    'gives you a warm hug',
-                    'gives you a hug. But wait? Sike its a cuddle.',
-                    'gives you a bear hug',
-                    'hugs you and is never letting go again'
-                ],
-                getCookie: function () {
-                    var c = Math.floor(Math.random() * this.cookies.length);
-                    return this.cookies[c];
+                 getCookie: function(chat) {
+                    var c = Math.floor(Math.random() * justbot.chat.hug.length);
+                    return justbot.chat.hug[c];
                 },
-                functionality: function (chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                functionality: function(chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void(0);
+                    if (!justbot.commands.executable(this.rank, chat)) return void(0);
                     else {
                         var msg = chat.message;
 
                         var space = msg.indexOf(' ');
                         if (space === -1) {
-                            API.sendChat(basicBot.chat.hug);
+                            API.sendChat(justbot.chat.hug);
                             return false;
+                        } else {
+                            var name = msg.substring(space + 2);
+                            var user = justbot.userUtilities.lookupUserName(name);
+                            if (user === false || !user.inRoom) {
+                                return API.sendChat(subChat(justbot.chat.nouserhug, {
+                                    name: name
+                                }));
+                            } else if (user.username === chat.un) {
+                                return API.sendChat(subChat(justbot.chat.selfhug, {
+                                    name: name
+                                }));
+                            } else {
+                                return API.sendChat(subChat(justbot.chat.hug, {
+                                    nameto: user.username,
+                                    namefrom: chat.un,
+                                    hug: this.gethug()
+                                }));
+                            }
                         }
+                    }
+                }
+            },
             
             cycleCommand: {
                 command: 'cycle',
@@ -2193,18 +2199,15 @@
                         for (var i = 0; i < chats.length; i++) {
                             var n = from[i].textContent;
                             if (name.trim() === n.trim()) {
-
                                 // var messagecid = $(message)[i].getAttribute('data-cid');
                                 // var emotecid = $(emote)[i].getAttribute('data-cid');
                                 // API.moderateDeleteChat(messagecid);
-
                                 // try {
                                 //     API.moderateDeleteChat(messagecid);
                                 // }
                                 // finally {
                                 //     API.moderateDeleteChat(emotecid);
                                 // }
-
                                 if (typeof $(message)[i].getAttribute('data-cid') == 'undefined'){
                                     API.moderateDeleteChat($(emote)[i].getAttribute('data-cid')); // works well with normal messages but not with emotes due to emotes and messages are seperate.
                                 } else {
