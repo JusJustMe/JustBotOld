@@ -238,7 +238,7 @@
             afkRankCheck: 'ambassador',
             motdEnabled: false,
             motdInterval: 5,
-            motd: 'I hope that everybody have a good day! ;3 Don;t forgot follow the rules! https://i.imgur.com/lsFCK4q Don;t forgot check !commands. We are recommending https://rcs.radiant.dj/ with our rcs plug theme!',
+            motd: 'I hope that everybody have a good day! ;3',
             filterChat: true,
             etaRestriction: false,
             welcome: true,
