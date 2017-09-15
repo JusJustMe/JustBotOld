@@ -175,7 +175,7 @@
         return str;
     };
 
-    var botCreator = 'mini500';
+    var botCreator = 'Gameplayer8850';
     var botMaintainer = 'JustJustMe';
     var botCreatorIDs = ['4878561', '16498004'];
 
