@@ -2046,7 +2046,7 @@
                 }
             },
 
-            hugCommand: {
+             hugCommand: {
                 command: 'hug',
                 rank: 'user',
                 type: 'startsWith',
@@ -2064,42 +2064,21 @@
                     'gives you a bear hug',
                     'hugs you and is never letting go again'
                 ],
-                getCookie: function(chat) {
-                    var c = Math.floor(Math.random() * justbot.chat.hug.length);
-                    return justbot.chat.hug[c];
+                getCookie: function () {
+                    var c = Math.floor(Math.random() * this.cookies.length);
+                    return this.cookies[c];
                 },
-                functionality: function(chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void(0);
-                    if (!justbot.commands.executable(this.rank, chat)) return void(0);
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
                         var msg = chat.message;
 
                         var space = msg.indexOf(' ');
                         if (space === -1) {
-                            API.sendChat(justbot.chat.hug);
+                            API.sendChat(basicBot.chat.hug);
                             return false;
-                        } else {
-                            var name = msg.substring(space + 2);
-                            var user = justbot.userUtilities.lookupUserName(name);
-                            if (user === false || !user.inRoom) {
-                                return API.sendChat(subChat(justbot.chat.nouserhug, {
-                                    name: name
-                                }));
-                            } else if (user.username === chat.un) {
-                                return API.sendChat(subChat(justbot.chat.selfhug, {
-                                    name: name
-                                }));
-                            } else {
-                                return API.sendChat(subChat(justbot.chat.hug, {
-                                    nameto: user.username,
-                                    namefrom: chat.un,
-                                    hug: this.gethug()
-                                }));
-                            }
                         }
-                    }
-                }
-            },
             
             cycleCommand: {
                 command: 'cycle',
